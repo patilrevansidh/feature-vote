@@ -1,6 +1,6 @@
 import HomeRoute from './auth';
-import FirstPrivateRoute from './home'
+import Dashboard from './dashboard'
 
 export {
-    HomeRoute, FirstPrivateRoute
+    HomeRoute, Dashboard
 }

@@ -1,20 +1,24 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-import { HomeRoute, FirstPrivateRoute } from '../modules/routesImport';
+import { HomeRoute, Dashboard } from '../modules/routesImport';
 
 const PrivateRoutes = (props) =>{
     return localStorage.getItem('isLoggedIn')
-            ? <Route path={props.path} component={props.component} />
+            ? <Route path={props.path} location= {props.location} component={props.component} />
             : <Redirect to="/" />
 }
 
 const Routes = (props) => {
+    const {location} = window
     return(
         <Router>
-            <Switch>
-                <Route exact path="/" component={HomeRoute} />
-                <PrivateRoutes exact path="/app" component={FirstPrivateRoute} />
-            </Switch>
+            <div>
+                <Switch>
+                    <Route exact path="/" location= {location} component={HomeRoute} />
+                    <PrivateRoutes exact path="/app" 
+                        location= {location} component={Dashboard} />
+                </Switch>
+            </div>
         </Router>
     )
 }
