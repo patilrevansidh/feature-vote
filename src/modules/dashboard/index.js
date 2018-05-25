@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
+import AdminDashboard from './home/adminDashboard';
+import UserDashboard from './home/userDashboard';
 
-class PrivateRoute extends Component {
-    render() {
-        return (
-            <div className="container">
-                Private Route
-            </div>
-        );
-    }
+const Dashboard = (props) => {
+    return localStorage.getItem('role') === "admin" ? <AdminDashboard role="admin" /> : <UserDashboard role="user"/>
 }
-
-export default PrivateRoute;
+export default Dashboard;

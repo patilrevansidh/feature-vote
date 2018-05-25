@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import {actions} from '../../modules/reducers/features'
 
 const users = [
     {username:"admin",password:"admin",role:"admin"},
@@ -8,11 +9,11 @@ const users = [
 ]
 
 const features = [
-    {id:1,title:'Add Pdf',description:'Add pdf description'},
-    {id:2,title:'Edit Pdf',description:'Edit pdf description'},
-    {id:3,title:'Delete Pdf',description:'Delete pdf description'},
-    {id:4,title:'export Pdf',description:'export pdf description'},
-    {id:5,title:'import Pdf',description:'import pdf description'},
+    {id:1,title:'Add Pdf',description:'Add pdf description', voted:[]},
+    {id:2,title:'Edit Pdf',description:'Edit pdf description',voted:[]},
+    {id:3,title:'Delete Pdf',description:'Delete pdf description',voted:[]},
+    {id:4,title:'export Pdf',description:'export pdf description',voted:[]},
+    {id:5,title:'import Pdf',description:'import pdf description',voted:[]},
 ]
 
 export const login = (body={username:'',password:''}) => {
@@ -33,5 +34,17 @@ export const login = (body={username:'',password:''}) => {
 }
 
 export const getFeatures = () => {
-    return features
+    return async dispatch =>{
+        dispatch({type:actions.GET_FEATURES,payload:features})
+    }
+}
+
+export const getFeatureDetails = (id) => {
+    return features.filter(f=>f.id == id)[0]  
+}
+
+export const deleteFeature = (id) =>{
+    return async dispatch =>{
+        dispatch({type:actions.DELETE_FEATURE,payload:id})
+    }
 }
