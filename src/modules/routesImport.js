@@ -1,5 +1,5 @@
-import HomeRoute from './app';
-import FirstPrivateRoute from './Home'
+import HomeRoute from './auth';
+import FirstPrivateRoute from './home'
 
 export {
     HomeRoute, FirstPrivateRoute
