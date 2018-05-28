@@ -2,7 +2,7 @@ import React from 'react';
 
 const LogOutButton = (props) => {
     return (
-        <button onClick={(e)=>{e.preventDefault();localStorage.clear()}}>
+        <button onClick={(e)=>{e.preventDefault();localStorage.clear();props.logPut()}}>
             Log Out
         </button>
     )

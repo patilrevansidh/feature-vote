@@ -13,13 +13,17 @@ const  FeatureList = (props) => {
 }
 
 const Feature = (props) => {
+    const voteButton = props.feature.voted.includes(localStorage.getItem('user')) ? null : <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onVote(props.feature.id)}}>Vote</Button>
+    const deleteButton = localStorage.getItem('role') === "admin" ? <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onDelete(props.feature.id)}}>Delete</Button> : null;
+    const totalVotes = props.feature.voted.length ;
     return (
         <Card>            
             <CardBody>
                 <Link to={`app/features/${props.feature.id}`}><CardTitle>{props.feature.title}</CardTitle></Link>
                 <CardText>{props.feature.description}</CardText>
-                <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onVote(props.feature.id)}}>Vote</Button>
-                <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onDelete(props.feature.id)}}>Delete</Button>
+                <div>Votes: {totalVotes}</div>
+                {voteButton}                
+                {deleteButton}
             </CardBody>
         </Card>
     )

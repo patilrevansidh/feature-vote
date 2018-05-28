@@ -9,9 +9,9 @@ const users = [
 ]
 
 const features = [
-    {id:1,title:'Add Pdf',description:'Add pdf description', voted:[]},
-    {id:2,title:'Edit Pdf',description:'Edit pdf description',voted:[]},
-    {id:3,title:'Delete Pdf',description:'Delete pdf description',voted:[]},
+    {id:1,title:'Add Pdf',description:'Add pdf description', voted:['revan']},
+    {id:2,title:'Edit Pdf',description:'Edit pdf description',voted:['revan','abhi']},
+    {id:3,title:'Delete Pdf',description:'Delete pdf description',voted:['abhi']},
     {id:4,title:'export Pdf',description:'export pdf description',voted:[]},
     {id:5,title:'import Pdf',description:'import pdf description',voted:[]},
 ]
@@ -46,5 +46,11 @@ export const getFeatureDetails = (id) => {
 export const deleteFeature = (id) =>{
     return async dispatch =>{
         dispatch({type:actions.DELETE_FEATURE,payload:id})
+    }
+}
+
+export const castVote = (id,username) => {
+    return async dispatch =>{
+        dispatch({type:actions.UPVOTE,payload:{id:id,user:username}})
     }
 }

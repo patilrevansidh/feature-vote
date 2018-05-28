@@ -15,13 +15,11 @@ const Routes = (props) => {
     const {location} = window
     return(
         <Router>
-            <div>
-                <Switch>
-                    <Route exact path="/" location= {location} component={HomeRoute} />
-                    <PrivateRoutes exact path="/app" location= {location} component={Dashboard} />
-                    <PrivateRoutes exact path="/app/features/:featureId" location= {location} component={FeatureDetail} />
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path="/" location= {location} component={HomeRoute} />
+                <PrivateRoutes exact path="/app" location= {location} component={Dashboard} />
+                <PrivateRoutes exact path="/app/features/:featureId" location= {location} component={FeatureDetail} />
+            </Switch>
         </Router>
     )
 }

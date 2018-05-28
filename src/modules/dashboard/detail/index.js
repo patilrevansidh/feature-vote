@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {getFeatureDetails} from '../../../common/service';
+import { getFeatureDetails, deleteFeature } from '../../../common/service';
 import {
     CardTitle, CardText, Button, CardColumns
 } from 'reactstrap';
+import { connect } from 'react-redux';
 
 
 class FeatureDetails extends Component {
@@ -26,25 +27,34 @@ class FeatureDetails extends Component {
         );
     }
 
-    handleDelete(id) {
-
+    handleDelete(id) {        
+        this.props.history.goBack();
+        this.props.deleteFeature(id)
     }
 
     handleVote(id) {
-        
     }
+
 }
 
 const FeatureDetail = (props) => {
     const deleteButton = localStorage.getItem('role') ? <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onDelete(props.feature.id)}}>Delete</Button> : ''
+    const voteButton = props.feature.voted.includes(localStorage.getItem('user')) ? null : <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onVote(props.feature.id)}}>Vote</Button>
+    const totalVotes = props.feature.voted.length ;
+
     return(
         <div>
             <CardTitle>{props.feature.title}</CardTitle>
-            <CardText>{props.feature.description}</CardText>        
-                <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onVote(props.feature.id)}}>Vote</Button>
+            <CardText>{props.feature.description}</CardText>  
+            <div>Votes: {totalVotes}</div>      
+                {voteButton}
                 {deleteButton}
         </div>
     )
 }
 
-export default FeatureDetails;
+const mapDispatchToProps = (dispatch) =>({
+    deleteFeature : (id)=>{ dispatch(deleteFeature(id))}
+})
+
+export default connect(null,mapDispatchToProps)(FeatureDetails);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Logout from '../../../common/components/logout';
-import { getFeatures, deleteFeature } from '../../../common/service';
+import { getFeatures, deleteFeature, castVote } from '../../../common/service';
 import FeatureList from '../list/';
 import { connect } from 'react-redux';
 
@@ -14,7 +14,7 @@ class Admindashboard extends Component {
     render() {
         return (
             <div className="container">
-                <Logout/> <br/>
+                <Logout logPut={()=>console.log("logged Out")}/> <br/>
                 <FeatureList 
                     onVote = {this.handleVote.bind(this)}
                     onDelete = {this.handleDelete.bind(this)}
@@ -28,7 +28,8 @@ class Admindashboard extends Component {
     }
 
     handleVote(id) {
-
+        const user = localStorage.getItem('user');
+        this.props.castVote(id,user)
     }
 }
 const mapStateToProps = (state) =>({
@@ -37,6 +38,8 @@ const mapStateToProps = (state) =>({
 
 const mapDispatchToProps = (dispatch) =>({
     getFeatures : ()=>{ dispatch(getFeatures())},
-    deleteFeature : (id)=>{ dispatch(deleteFeature(id))}
+    deleteFeature : (id)=>{ dispatch( deleteFeature(id) )},
+    castVote : (id,user)=>{ dispatch( castVote(id, user) )}
 })
+
 export default connect(mapStateToProps,mapDispatchToProps)(Admindashboard);

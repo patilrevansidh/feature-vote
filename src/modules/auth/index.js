@@ -23,6 +23,7 @@ class AppHome extends Component {
             this.setState({isLoggedIn:true});
             localStorage.setItem('isLoggedIn',true);
             localStorage.setItem('role',response.data.role);
+            localStorage.setItem('user',response.data.username);
             // this.props.history.push("app");
             console.log("logged In");
         }else {
