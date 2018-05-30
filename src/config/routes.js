@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-import { HomeRoute, Dashboard, FeatureDetail } from '../modules/routesImport';
+import { HomeRoute, Dashboard, FeatureDetail, NewFeature } from '../modules/routesImport';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -19,6 +19,7 @@ const Routes = (props) => {
                 <Route exact path="/" location= {location} component={HomeRoute} />
                 <PrivateRoutes exact path="/app" location= {location} component={Dashboard} />
                 <PrivateRoutes exact path="/app/features/:featureId" location= {location} component={FeatureDetail} />
+                <PrivateRoutes exact path="/app/feature/new" location= {location} component={NewFeature} />
             </Switch>
         </Router>
     )

@@ -35,20 +35,22 @@ export const getFeatures = () => {
 
 export const getFeatureDetails = (id) => {
     return async (dispatch) =>{
-        try {
-            const response = await api.fetchFeatureDetail(id)
-            console.log("feature details", response);
+        try {            
+            dispatch({type:actions.GET_FEATURE_DETAIL, payload:id})
         } catch (error) {
-            console.log("feature detail error")
+            console.log("feature detail error",error)
        }
     }
 }
 
-export const deleteFeature = (id) => {
+export const deleteFeature = (id,history) => {
     return async (dispatch) =>{
         try {
             const response = await api.deleteFeature(id)
             dispatch({ type: actions.DELETE_FEATURE, payload: response.data.data })
+            if(history) {
+                history.goBack()
+            }
         } catch (error) {
             console.log("feature detail error")
         }
@@ -59,9 +61,21 @@ export const castVote = (id) => {
     return async (dispatch) =>{
         try {
             const response = await api.castVote(id)
-            console.log("feature details", response);
+            dispatch({ type: actions.GET_FEATURES, payload: response.data.data })
         } catch (error) {
             console.log("feature detail error")
+        }
+    }
+}
+
+export const addFeature = (body, history) => {
+    return async (dispatch) => {
+        try {            
+            const response = await api.postFeature(body)
+            dispatch({ type: actions.ADD_FEATURE, payload: response.data.data })
+            history.goBack()
+        } catch (error) {
+            
         }
     }
 }

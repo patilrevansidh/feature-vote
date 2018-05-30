@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
-import { getFeatureDetails, deleteFeature } from '../../../common/service';
+// import { deleteFeature } from '../../../common/service';
 import {
     CardTitle, CardText, Button, CardColumns
 } from 'reactstrap';
 import { connect } from 'react-redux';
+import { getFeatureDetails, castVote, deleteFeature } from '../../../common/service/action';
 
 
 class FeatureDetails extends Component {
     state = {feature:{}}
     componentWillMount() {
-        const feature = getFeatureDetails(this.props.match.params.featureId)
-        this.setState({feature});
+        this.props.getFeatureDetails(this.props.match.params.featureId)
+        // const feature = this.props.feature.features.filter(f=>f.d !==this.props.match.params.featureId)[0]
+        // this.setState({feature});
     }
     
     render() {
-        const detail = this.state.feature.id 
+        console.log("feature detail",this.props)
+        const detail = this.props.feature.featureDetail && this.props.feature.featureDetail.id
                      ? <FeatureDetail 
-                            onVote={this.handleVote.bind(this)} feature={this.state.feature}
+                            onVote={this.handleVote.bind(this)}
+                            feature={this.props.feature.featureDetail}
                             onDelete={this.handleDelete.bind(this)}
                         /> 
                      : ''
@@ -28,19 +32,22 @@ class FeatureDetails extends Component {
     }
 
     handleDelete(id) {        
-        this.props.history.goBack();
-        this.props.deleteFeature(id)
+        this.props.deleteFeature(id,this.props.history)        
     }
 
     handleVote(id) {
+        this.props.castVote(id)
     }
 
 }
 
 const FeatureDetail = (props) => {
-    const deleteButton = localStorage.getItem('role') ? <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onDelete(props.feature.id)}}>Delete</Button> : ''
-    const voteButton = props.feature.voted.includes(localStorage.getItem('user')) ? null : <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onVote(props.feature.id)}}>Vote</Button>
-    const totalVotes = props.feature.voted.length ;
+    const user = JSON.parse(localStorage.getItem('userDetails'))
+    const voteButton = props.feature.voted_people.includes(`${user.id}`)
+                    ? null 
+                    : <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onVote(props.feature.id)}}>Vote</Button>
+    const deleteButton = user.role === "admin" ? <Button style={{margin:5}} onClick={(e)=>{e.preventDefault();props.onDelete(props.feature.id)}}>Delete</Button> : null;
+    const totalVotes = props.feature.vote ;
 
     return(
         <div>
@@ -48,13 +55,20 @@ const FeatureDetail = (props) => {
             <CardText>{props.feature.description}</CardText>  
             <div>Votes: {totalVotes}</div>      
                 {voteButton}
-                {deleteButton}
+                {deleteButton} 
         </div>
     )
 }
 
-const mapDispatchToProps = (dispatch) =>({
-    deleteFeature : (id)=>{ dispatch(deleteFeature(id))}
+const mapStateToProps = (state) => ({
+    feature: state.featuresReducer
 })
 
-export default connect(null,mapDispatchToProps)(FeatureDetails);
+
+const mapDispatchToProps = (dispatch) =>({
+    getFeatureDetails : (id)=>{ dispatch(getFeatureDetails(id))},
+    deleteFeature : (id,history)=>{ dispatch(deleteFeature(id,history))},
+    castVote : (id)=>{ dispatch(castVote(id))},
+
+})
+export default connect(mapStateToProps, mapDispatchToProps)(FeatureDetails);

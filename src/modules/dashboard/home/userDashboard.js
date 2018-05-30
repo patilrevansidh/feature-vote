@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Logout from '../../../common/components/logout';
 import FeatureList from '../list/';
-import { castVote } from '../../../common/service/';
-import { getFeatures } from '../../../common/service/action'
+import { getFeatures, castVote } from '../../../common/service/action'
 import { withRouter } from 'react-router-dom';
 
 
-class Userdashboard extends Component {
-    
+class Userdashboard extends Component {    
     componentWillMount() {
         this.props.getFeatures()
     }
@@ -25,7 +23,7 @@ class Userdashboard extends Component {
     }
     handleVote(id) {
         const user = localStorage.getItem('user');
-        this.props.castVote(id,user)
+        this.props.castVote(id)
     }
 }
 const mapStateToProps = (state) =>({
@@ -34,7 +32,7 @@ const mapStateToProps = (state) =>({
 
 const mapDispatchToProps = (dispatch) =>({
     getFeatures : ()=>{ dispatch(getFeatures())},
-    castVote : (id,user)=>{ dispatch( castVote(id, user) )}
+    castVote : (id)=>{ dispatch( castVote(id) )}
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Userdashboard));

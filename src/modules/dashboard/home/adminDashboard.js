@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Logout from '../../../common/components/logout';
-import {  castVote } from '../../../common/service';
-import { getFeatures, deleteFeature } from '../../../common/service/action';
+import { getFeatures, deleteFeature, castVote } from '../../../common/service/action';
 import FeatureList from '../list/';
 import { connect } from 'react-redux';
+import { Link,withRouter } from 'react-router-dom';
 
 class Admindashboard extends Component {
     state = {features:[]}
@@ -16,6 +16,9 @@ class Admindashboard extends Component {
         return (
             <div className="container">
                 <Logout logPut={()=>console.log("logged Out")}/> <br/>
+                <button style={{marginTop: 5, marginBottom: 5}} onClick={(e)=>{e.preventDefault();    this.props.history.push("app/feature/new");}}>
+                            Add New Feature
+                </button>
                 <FeatureList 
                     onVote = {this.handleVote.bind(this)}
                     onDelete = {this.handleDelete.bind(this)}
@@ -29,8 +32,7 @@ class Admindashboard extends Component {
     }
 
     handleVote(id) {
-        const user = localStorage.getItem('user');
-        this.props.castVote(id,user)
+        this.props.castVote(id)
     }
 }
 const mapStateToProps = (state) =>({
@@ -40,7 +42,7 @@ const mapStateToProps = (state) =>({
 const mapDispatchToProps = (dispatch) =>({
     getFeatures : ()=>{ dispatch(getFeatures())},
     deleteFeature : (id)=>{ dispatch( deleteFeature(id) )},
-    castVote : (id,user)=>{ dispatch( castVote(id, user) )}
+    castVote : (id)=>{ dispatch( castVote(id) )}
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Admindashboard);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Admindashboard));

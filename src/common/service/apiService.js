@@ -25,6 +25,7 @@ const api = {
         const url = `features/${id}/vote`;
         const userDetails = JSON.parse(localStorage.getItem('userDetails'));
         const body = {user_id:userDetails.id}
+        console.log(url,body)
         return httpService.put(url,body)
     }
     

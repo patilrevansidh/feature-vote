@@ -3,11 +3,13 @@ export const actions = {
     'GET_FEATURE_DETAIL': 'GET_FEATURE_DETAIL',
     'EDIT_FEATURE_DETAIL': 'EDIT_FEATURE_DETAIL',
     'DELETE_FEATURE': 'DELETE_FEATURE',
-    'UPVOTE': 'UPVOTE'
+    'UPVOTE': 'UPVOTE',
+    'ADD_FEATURE':'ADD_FEATURE'
 }
 
 const initState = {
-    features:[]
+    features:[],
+    featureDetail:{}
 }
 
 const featureReducer = (state=initState, action) => {
@@ -15,15 +17,16 @@ const featureReducer = (state=initState, action) => {
         case actions.GET_FEATURES:
             return { ...state, features: action.payload }
             break;
+        case actions.GET_FEATURE_DETAIL:
+            const feature = state.features.filter(f=>f.id == action.payload)[0]
+            return {...state, featureDetail: feature }
+            break;
         case actions.DELETE_FEATURE:
             return { ...state, features: action.payload }
             break;
-        case actions.UPVOTE:
-            const arr = state.features.filter(f=>f.id != action.payload.id);
-            const votedFeature = state.features.filter(f=>f.id == action.payload.id)[0];
-            const newObj = {...votedFeature,voted:[...votedFeature.voted,action.payload.user]}
-            arr.push(newObj)
-            return {...state.features,features:arr}
+        case action.ADD_FEATURE:
+            return { ...state, features: action.payload }
+            break;
         default:
             return { ...state }                
     }
