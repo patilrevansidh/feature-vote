@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Logout from '../../../common/components/logout';
-import { getFeatures, deleteFeature, castVote } from '../../../common/service';
+import {  castVote } from '../../../common/service';
+import { getFeatures, deleteFeature } from '../../../common/service/action';
 import FeatureList from '../list/';
 import { connect } from 'react-redux';
 

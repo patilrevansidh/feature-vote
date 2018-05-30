@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Logout from '../../../common/components/logout';
 import FeatureList from '../list/';
-import { getFeatures, castVote } from '../../../common/service/';
+import { castVote } from '../../../common/service/';
+import { getFeatures } from '../../../common/service/action'
 import { withRouter } from 'react-router-dom';
 
 

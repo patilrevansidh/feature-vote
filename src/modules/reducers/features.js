@@ -16,8 +16,7 @@ const featureReducer = (state=initState, action) => {
             return { ...state, features: action.payload }
             break;
         case actions.DELETE_FEATURE:
-            const features = state.features.filter(f=>f.id != action.payload)
-            return {...state, features: features }
+            return { ...state, features: action.payload }
             break;
         case actions.UPVOTE:
             const arr = state.features.filter(f=>f.id != action.payload.id);

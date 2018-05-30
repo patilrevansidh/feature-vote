@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { login } from '../../common/service';
+import { login, apiService } from '../../common/service';
+
 import { withRouter, Redirect } from "react-router-dom";
 
 class AppHome extends Component {
@@ -17,17 +18,14 @@ class AppHome extends Component {
         );
     }
 
-    handleLogin() {        
-        const response = login(this.state);
-        if(response.success) {
-            this.setState({isLoggedIn:true});
+    async handleLogin() {        
+        try {
+            const response =await apiService.login(this.state);
             localStorage.setItem('isLoggedIn',true);
-            localStorage.setItem('role',response.data.role);
-            localStorage.setItem('user',response.data.username);
-            // this.props.history.push("app");
-            console.log("logged In");
-        }else {
-            this.setState({error:response.message});
+            localStorage.setItem('userDetails',JSON.stringify(response.data.data))
+            this.setState({isLoggedIn:response.success});
+        } catch (error) {
+            console.log("error in login",error)   
         }
     }
 

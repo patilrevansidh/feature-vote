@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import {actions} from '../../modules/reducers/features'
+import {actions} from '../../modules/reducers/features';
+import apiService from './apiService';
 
 const users = [
     {username:"admin",password:"admin",role:"admin"},
@@ -54,3 +55,5 @@ export const castVote = (id,username) => {
         dispatch({type:actions.UPVOTE,payload:{id:id,user:username}})
     }
 }
+
+export { apiService }
