@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-
 const Header = (props) =>{ 
     return (
         <div id="navbar" className="navbar navbar-default  ace-save-state">
@@ -31,7 +30,7 @@ const Profile = (props) => {
                 <ul className="nav ace-nav">
                 <li className="light-blue dropdown-modal">
                     <Link data-toggle="dropdown" to="/" className="dropdown-toggle">
-                        <img alt="Users's Photo" className="nav-user-photo fa-user-circle" />
+                        <img alt="Users's Photo" className="nav-user-photo fa-user-circle" src={require('../user.png')} />
                         <span className="user-info">
                             <small>Welcome </small>
                             {user.username}
