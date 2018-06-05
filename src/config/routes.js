@@ -3,12 +3,35 @@ import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-ro
 import { HomeRoute, Dashboard, FeatureDetail, NewFeature } from '../modules/routesImport';
 import { Provider } from 'react-redux';
 import store from './store';
+import {Header, MainContainer, Sidebar} from '../common/components';
 
 
 const PrivateRoutes = (props) =>{
     return localStorage.getItem('isLoggedIn')
-            ? <Route path={props.path} location= {props.location} component={props.component} />
+            ?  <AppContent>
+                    <Route path={props.path} location= {props.location} component={props.component} />
+                </AppContent>
             : <Redirect to="/" />
+}
+
+const AppContent = (props) => {
+    return(
+        <div>
+            <Header/>
+            <div className="main-container ace-save-state" id="main-container">
+                <MainContainer>
+                    <Sidebar/>
+                    <div className="main-content">
+                        <div className="main-content-inner">
+                            <div className="page-content center">
+                                {props.children}
+                            </div>
+                        </div>
+                    </div>
+                </MainContainer>
+            </div>
+        </div>
+    )
 }
 
 const Routes = (props) => {
