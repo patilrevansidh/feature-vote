@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { login, apiService } from '../../common/service';
 import GoogleLogin from 'react-google-login';
 import { withRouter, Redirect } from "react-router-dom";
-import stringConstant from '../../common/constants/stringConstant';
+import Form from './form';
 
 class AppHome extends Component {
     state={username:'',password:'',isLoggedIn:false,error:undefined}
@@ -12,7 +12,7 @@ class AppHome extends Component {
             return <Redirect to="/app" />
         }
         return (
-            <Login
+            <Form
                 error={this.state.error}
                 onLogin={this.handleLogin.bind(this)}
                 onTextChange={this.handleTextChange.bind(this)}/>
@@ -33,22 +33,6 @@ class AppHome extends Component {
     handleTextChange(value,name) {
         this.setState({[name]: value});
     }
-}
-
-const Login = (props) => {
-    return(
-        <div className="container">
-            <div className="form">
-                <form className="login-form">
-                <br/><br/>
-                    <input onChange={(e)=>props.onTextChange(e.target.value,'username')} type="text" placeholder="username"/><br/><br/>
-                    <input onChange={(e)=>props.onTextChange(e.target.value,'password')} type="password" placeholder="password"/><br/><br/>
-                    <button onClick={(e)=>{e.preventDefault();props.onLogin()}}>login</button>
-                </form>
-                {props.error}
-            </div>
-        </div>
-    )
 }
 
 export default AppHome; 
