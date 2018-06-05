@@ -1,4 +1,4 @@
-
+import { STORAGE_KEYS } from '../constants/stringConstant';
 const UNAUTHORIZED = "Unauthorized";
 const BASE_URL = "http://localhost:3001/"
 
@@ -32,8 +32,12 @@ function doHttpCall(url, method, body={}, isLogin) {
             if (method === 'post' || method === 'put') {
                 options.body = JSON.stringify(body)
             }
-         
+            const isLoggedIn=localStorage.getItem(STORAGE_KEYS.IS_LOGGED_IN)
             options.headers = new Headers();
+            if(isLoggedIn) {
+                const userDetails = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_DETAILS))
+                options.headers.append('user_id', `${userDetails.id}`);                
+            }
             options.headers.append('Content-Type', 'application/json');
     
             fetch(NEW_URL, options)

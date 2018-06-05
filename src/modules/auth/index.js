@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { login, apiService } from '../../common/service';
-
+import GoogleLogin from 'react-google-login';
 import { withRouter, Redirect } from "react-router-dom";
+import stringConstant from '../../common/constants/stringConstant';
 
 class AppHome extends Component {
     state={username:'',password:'',isLoggedIn:false,error:undefined}
@@ -51,3 +52,12 @@ const Login = (props) => {
 }
 
 export default AppHome; 
+
+
+
+{/* <GoogleLogin
+clientId={stringConstant.GOOGLE_CLIENT_ID}
+buttonText="Login"
+onSuccess={(response)=>console.log("reponse",response)}
+onFailure={(response)=>console.log("reponse",response)}
+/> */}
