@@ -11,28 +11,220 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+   
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+		<link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/css/jquery.gritter.min.css" />
 		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+		<script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
+		<script src="https://unpkg.com/classnames/index.js"></script>
+		<script src="https://unpkg.com/react-input-autosize/dist/react-input-autosize.js"></script>
+		<script src="https://unpkg.com/react-select/dist/react-select.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://npmcdn.com/react-router@3.0.2/umd/ReactRouter.min.js"></script>
+		<script src="assets/js/jquery.raty.min.js"></script>
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+
+	 	<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+    <script src="https://npmcdn.com/bootstrap@4.0.0-alpha.5/dist/js/bootstrap.min.js"></script>
     
     <title>React App</title>
+
+    <style>
+			.th-sort {
+			    width: 5%;
+			    float: right;
+			    text-align: right;
+			    cursor: pointer;
+			}
+			.rdw-editor-toolbar{
+				border-radius: 0px !important;
+				border-color: #d5d5d5 !important;
+				background-color: #e5e5e5 !important;
+			}
+			.profile-user-info{
+				margin-left: 0px;
+			    margin-right: 0px;
+			    margin-bottom: 12px;
+			    width: 100%;
+			}
+			.description-title{
+				border-bottom: 1px dotted #DCEBF7;
+				background-color: #EDF3F4;
+				padding: 5px;
+			}
+			.description{
+				padding: 10px 5px !important;
+			}
+			.remove-top-margin {
+				margin-top : -20px;
+			}
+			.btn-group > .btn > .caret{
+				margin-top: 0px;
+				border-top-color: #858585 !important;
+			}
+			.has-error .multiselect-native-select > .btn-group > .multiselect{
+				border-color: #D16E6C !important;
+			}
+			.multiselect-native-select > .btn-group{
+				width: 100% !important;
+			}
+			.multiselect-native-select > .btn-group > .multiselect {
+				border: 1px solid #d5d5d5 !important;
+				color: #858585 !important;
+				width: 100% !important;
+				background-color: white !important;
+				font-weight: 100 !important;
+			}
+			.select2-selection.select2-selection--multiple{
+			    border-color: #d5d5d5 !important;
+				border-radius: 0 !important;
+			}.rdw-editor-main {
+				border: 1px solid #d5d5d5 !important;
+			}
+			.multiselect-clear-filter{
+			    border-width: 4px;
+			    font-size: 13px;
+			    padding: 4px 9px;
+			    line-height: 1.38;
+			}
+			li.select2-selection__choice{
+				border-radius: 0px !important;
+			}
+			.select2-container--default.select2-container--focus .select2-selection, .multiselect-container.dropdown-menu, .select2-dropdown.select2-dropdown--below{
+				border-color: #f59942 !important;
+			}
+			.pagination li{
+				cursor: pointer;
+			}
+			.wysiwyg-toolbar .btn-group{
+				float: left !important;
+			}
+
+			@media (max-width: 767px){
+				.members span {
+					width: 100% !important;
+				}
+			} 
+			
+		</style>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+   <script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+	<script src="assets/js/jquery-2.1.4.min.js"></script>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+		<script src="assets/js/jquery-ui.custom.min.js"></script>
+		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+		<!-- ace scripts -->
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="https://npmcdn.com/react-router@3.0.2/umd/ReactRouter.min.js"></script>
+		<script src="assets/js/jquery.raty.min.js"></script>
+
+		<script src="assets/js/jquery-2.1.4.min.js"></script>
+
+		<script src="assets/js/jquery.hotkeys.index.min.js"></script>
+		<script src="assets/js/bootstrap-wysiwyg.min.js"></script>
+		<script src="assets/js/moment.min.js"></script>
+		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+		
+<!-- Profile Button and Side togglinng-->
+		<script src="assets/js/ace-elements.min.js"></script>
+		<script src="assets/js/ace.min.js"></script>
+
+
+
+		<script>
+			$(['data-toggle="dropdown"']).tooltip();
+			$('a').tooltip({placement: 'auto',attr:"data-original-title"});
+			$('a').tooltip();
+		</script>
+		<script type="text/javascript">
+		
+    	$(document).ready(function() {
+			$('#multiselectbootstrap').multiselect({
+				enableFiltering: true,
+				enableFullValueFiltering: true
+			});
+
+			$('textarea[data-provide="markdown"]').each(function(){
+				var $this = $(this);
+
+				if ($this.data('markdown')) {
+				$this.data('markdown').showEditor();
+				}
+				else $this.markdown()
+				
+				$this.parent().find('.btn').addClass('btn-white');
+			})
+		});
+
+		function setEditor() {
+			$('#editor1').ace_wysiwyg({
+				toolbar:
+				[
+					null,
+					'font',
+					null,
+					'fontSize',
+					null,
+					{name:'bold', className:'btn-info',title:'bold',dataPlacement:"auto"},
+					{name:'italic', className:'btn-info',title:"Italic"},
+					{name:'strikethrough', className:'btn-info'},
+					{name:'underline', className:'btn-info'},
+					null,
+					{name:'insertunorderedlist', className:'btn-success'},
+					{name:'insertorderedlist', className:'btn-success'},
+					{name:'outdent', className:'btn-purple'},
+					{name:'indent', className:'btn-purple'},
+					null,
+					{name:'justifyleft', className:'btn-primary',dataPlacement:"auto"},
+					{name:'justifycenter', className:'btn-primary'},
+					{name:'justifyright', className:'btn-primary'},
+					{name:'justifyfull', className:'btn-inverse'},
+					null,
+					{name:'createLink', className:'btn-pink'},
+					null,
+					'foreColor',
+					null,
+					{name:'undo', className:'btn-grey'},
+					{name:'redo', className:'btn-grey'}
+				]
+			}).prev().addClass('wysiwyg-style2');
+		}
+
+		function setIntialValue (value) {
+			$('#editor1').html(value);
+		}
+
+		function getHtmlValue() {
+			return $('#editor1').html();
+		}
+
+		window.setEditor = setEditor;
+		window.setIntialValue = setIntialValue;
+	</script>
   </body>
 </html>
