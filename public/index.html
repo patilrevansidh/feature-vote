@@ -163,23 +163,23 @@
 		</script>
 		<script type="text/javascript">
 		
-    	$(document).ready(function() {
-			$('#multiselectbootstrap').multiselect({
-				enableFiltering: true,
-				enableFullValueFiltering: true
-			});
+    	// $(document).ready(function() {
+		// 	$('#multiselectbootstrap').multiselect({
+		// 		enableFiltering: true,
+		// 		enableFullValueFiltering: true
+		// 	});
 
-			$('textarea[data-provide="markdown"]').each(function(){
-				var $this = $(this);
+		// 	$('textarea[data-provide="markdown"]').each(function(){
+		// 		var $this = $(this);
 
-				if ($this.data('markdown')) {
-				$this.data('markdown').showEditor();
-				}
-				else $this.markdown()
+		// 		if ($this.data('markdown')) {
+		// 		$this.data('markdown').showEditor();
+		// 		}
+		// 		else $this.markdown()
 				
-				$this.parent().find('.btn').addClass('btn-white');
-			})
-		});
+		// 		$this.parent().find('.btn').addClass('btn-white');
+		// 	})
+		// });
 
 		function setEditor() {
 			$('#editor1').ace_wysiwyg({
