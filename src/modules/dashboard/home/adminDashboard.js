@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Logout from '../../../common/components/logout';
+import { FIELDS, HEADER, ACTIONS,TYPE } from '../../../common/constants/stringConstant';
+import { Sidebar, MainContainer, Header, PageHeader, Table } from '../../../common/components'
 import { getFeatures, deleteFeature, castVote } from '../../../common/service/action';
 import FeatureList from '../list/';
 import { connect } from 'react-redux';
 import { Link,withRouter } from 'react-router-dom';
+// import { swalService } from '../../../common/service';
 
 class Admindashboard extends Component {
     state = {features:[]}
@@ -13,17 +16,23 @@ class Admindashboard extends Component {
     }
 
     render() {
-        return (
-            <div className="container">
-                <Logout logPut={()=>console.log("logged Out")}/> <br/>
-                <button style={{marginTop: 5, marginBottom: 5}} onClick={(e)=>{e.preventDefault();    this.props.history.push("app/feature/new");}}>
-                            Add New Feature
-                </button>
-                <FeatureList 
-                    onVote = {this.handleVote.bind(this)}
-                    onDelete = {this.handleDelete.bind(this)}
-                    features={this.props.features.features ? this.props.features.features : [] }/>
-            </div>
+        return (            
+            <div className="main-content">
+                <div className="main-content-inner">
+                    <div className="page-content">
+                        <PageHeader path="app/feature/new" pageHeader="Features"/>
+                        <Table
+                            type={TYPE.FEATURE}
+                            onArchive={(id)=>console.log('onArchive',id)}
+                            onDelete={this.handleDelete.bind(this)}
+                            onDetails={(id)=>this.props.history.push(`/app/features/${id}`)}
+                            actions={ACTIONS.FEATURE}
+                            fields={FIELDS.FEATURE}
+                            headers = {HEADER.FEATURE}
+                            data={this.props.features.features ? this.props.features.features : [] } />                       
+                    </div>
+                </div>
+             </div>
         );
     }
 

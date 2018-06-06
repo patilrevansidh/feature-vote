@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import api from './apiService'
+import swal from 'sweetalert';
 import {actions} from '../../modules/reducers/features';
 
 export const doLogin = (body) => {
@@ -13,14 +14,6 @@ export const doLogin = (body) => {
         }
     }
 }
-// "data": {
-//     "data": {
-//         "id": 1,
-//         "username": "revan",
-//         "password": "revan",
-//         "role": "admin"
-//     }
-// }
 
 export const getFeatures = () => {
     return async (dispatch) =>{
@@ -46,12 +39,21 @@ export const getFeatureDetails = (id) => {
 export const deleteFeature = (id,history) => {
     return async (dispatch) =>{
         try {
-            const response = await api.deleteFeature(id)
-            dispatch({ type: actions.DELETE_FEATURE, payload: response.data.data })
-            if(history) {
-                history.goBack()
-            }
+                const willDelete = await swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this feature!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true, })
+                if(willDelete) {                        
+                    const response = await api.deleteFeature(id)            
+                    dispatch({ type: actions.DELETE_FEATURE, payload: response.data.data })
+                    swal("Poof! Your feature has been deleted!", {icon: "success"});
+                }else {
+                    throw Error
+                }
         } catch (error) {
+            swal("Your feature file is safe!");
             console.log("feature detail error")
         }
     }
