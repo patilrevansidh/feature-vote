@@ -39,9 +39,9 @@ const  PageHeader = (props) =>{
                     </div>
                     <div className="col-sm-6">
                         <div className="pull-right">                           
-                            <Link className="btn btn-success" to={`${props.path}`}>
+                            <a className="btn btn-success" onClick={(e)=>{e.preventDefault();props.onAddClick()}}>
                                  <i className="fa fa-plus" />
-                           </Link>
+                           </a>
                         </div>
                     </div>
                 </div>

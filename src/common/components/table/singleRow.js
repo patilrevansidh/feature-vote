@@ -11,7 +11,7 @@ const SingleRow = (props) => {
                             <i className="ace-icon fa fa-archive bigger-120" />
                       </button>
                     : null
-    const actions = user.role == "admin" 
+    const actions = user.role == "admin" && props.actions
                   ? <React.Fragment>
                         {archive}
                         <button className="btn btn-xs btn-danger" onClick={(e)=>props.onDelete(props.data.id)}>

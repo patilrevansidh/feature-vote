@@ -27,6 +27,20 @@ const api = {
         const body = {user_id:userDetails.id}
         console.log(url,body)
         return httpService.put(url,body)
+    },
+    fetchUsers(str='') {
+        const url = 'users';
+        const body = {name:str}
+        return httpService.get(url)
+    },
+    fetchGroups (str='') {
+        const url = 'groups';
+        const body = {grpname:str}
+        return httpService.get(url,body)
+    },
+    postGroup (body) {
+        const url = 'groups';
+        return httpService.post(url,body)
     }
     
 }

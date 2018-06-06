@@ -4,7 +4,7 @@ import { STORAGE_KEYS } from '../constants/stringConstant';
 
 
 const item = [
-    { name: 'Dashboard', icon: 'menu-icon fa fa-tachometer', path: "app" },
+    { name: 'Dashboard', icon: 'menu-icon fa fa-tachometer', path: "/app" },
     { name: 'Users', icon: 'menu-icon fa fa-user-plus', path: "/app/users" },
     { name: 'Groups', icon: 'menu-icon fa fa-users', path: "/app/groups" },
 ]

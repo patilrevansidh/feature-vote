@@ -5,17 +5,17 @@ export const STORAGE_KEYS = {
 
 export const HEADER = {
     FEATURE : ['Title','Votes','Posted By','Action'],
-    USER : ['Name','Role'],
-    GROUPS : ['Name'],    
+    USER : ['Name','Role','Email','Action'],
+    GROUPS : ['Name','Action'],    
 }
 export const FIELDS = {
     FEATURE : ['title','vote','created_by'],
-    USER : ['username','role'], 
+    USER : ['username','role','email'], 
     GROUPS : ['name'],
 }
 export const ACTIONS = {
     FEATURE : ['delete','archive','view'],
-    USER : ['view'], 
+    USER : [''], 
     GROUPS : ['view'],
 }
 

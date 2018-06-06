@@ -20,7 +20,7 @@ class Admindashboard extends Component {
             <div className="main-content">
                 <div className="main-content-inner">
                     <div className="page-content">
-                        <PageHeader path="app/feature/new" pageHeader="Features"/>
+                        <PageHeader onAddClick={()=>this.props.history.push("app/feature/new")} pageHeader="Features"/>
                         <Table
                             type={TYPE.FEATURE}
                             onArchive={(id)=>console.log('onArchive',id)}
