@@ -3,7 +3,9 @@ import SingleRow from './singleRow';
 const TableRows = (props) => {
     const rows = props.data.length ==0 
                 ? <NoDataFound spanValue={4}/>
-                : props.data.map((m)=>{return <SingleRow fields={props.fields} data={m}/>})
+                : props.data.map((m)=>{
+                    return <SingleRow  {...props} data={m}/>
+                })
     return (
         <tbody>
             {rows}

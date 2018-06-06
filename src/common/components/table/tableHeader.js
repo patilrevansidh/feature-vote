@@ -7,7 +7,6 @@ const TableHeader = (props) => {
     return (
         <thead>
             <tr>
-                <th className="detail-col">Details</th>
                 {headers}
             </tr>
         </thead>
