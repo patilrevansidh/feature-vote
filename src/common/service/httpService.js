@@ -4,9 +4,9 @@ const BASE_URL = "http://localhost:3001/"
 
 
 let obj = {
-    get (url) {
+    get (url,body) {
         const METHOD = 'get';
-        return doHttpCall(url, METHOD);
+        return doHttpCall(url, METHOD, body);
     },
     put (url,body) {
         const METHOD = 'put';
@@ -24,13 +24,16 @@ let obj = {
 
 function doHttpCall(url, method, body={}, isLogin) {
     const promise = new Promise((resolve, reject) => {      
-            const NEW_URL = BASE_URL + url;
+            let NEW_URL = BASE_URL + url;
             let options = {
                 method : method
             };
 
             if (method === 'post' || method === 'put') {
                 options.body = JSON.stringify(body)
+            }
+            if(method ==='get') {
+                NEW_URL = NEW_URL + constructParams(body)
             }
             const isLoggedIn=localStorage.getItem(STORAGE_KEYS.IS_LOGGED_IN)
             options.headers = new Headers();
@@ -62,6 +65,26 @@ function checkStatus(data) {
         }
     });
     return promise;
+}
+
+function constructParams(params={}) {
+    const keys = Object.keys(params);
+
+    if (keys.length === 0) {
+        return "";
+    }
+
+    let paramString = '?';
+
+    for (let i = 0, ii = keys.length; i < ii; i++) {
+        paramString += `${keys[i]}=${params[keys[i]]}`;
+
+        if ( i !== ii - 1) {
+            paramString += '&';
+        }
+    }
+
+    return paramString;
 }
 
 export default obj;
