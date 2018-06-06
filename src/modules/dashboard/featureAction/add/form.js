@@ -1,10 +1,16 @@
 import React from 'react';
+import { GroupSelect, UserSelect } from '../../../../common/components';
 
 const NewFeatureForm = (props) => {
     return (
         <Form>
-            <TextInput placeholder="Feature title"  onChange={(e)=>props.onTextChange(e.target.value,'title')} />
-            <TextInput placeholder="Feature description"  onChange={(e)=>props.onTextChange(e.target.value,'description')} />
+            <TextInput label="Title" placeholder="Feature title"  onChange={(e)=>props.onTextChange(e.target.value,'title')} />
+            <TextInput label="description" placeholder="Feature description"  onChange={(e)=>props.onTextChange(e.target.value,'description')} />
+            <GroupSelect 
+                label="Select Group(s)"/> 
+            <UserSelect 
+                onSeletionChange={props.onUserSelection}
+                label="Select User(s)"/>
             <FormButton 
                 onSubmit={(e)=>props.onAdd()}
                 onCancel={(e)=>console.log("submiteed")}/>
@@ -47,6 +53,7 @@ const TextInput = (props) => {
             </div>
         )
 }
+
 const FormButton = (props) =>{
     return(
         <div className="row push-down-2">
@@ -68,6 +75,7 @@ const FormButton = (props) =>{
                 
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default NewFeatureForm;
