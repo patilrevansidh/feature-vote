@@ -8,7 +8,8 @@ class AddFeature extends Component {
     state = { title: '', description: '', invited:[],group_ids:[]}
     render() {
         return (
-            <FeatureForm 
+                <FeatureForm 
+                invited={this.state.invited}
                 onUserSelection={this.handleUserSelection.bind(this)}
                 onTextChange={this.handleTextChange.bind(this)} 
                 onAdd={this.handleAddFeature.bind(this)}
@@ -17,8 +18,10 @@ class AddFeature extends Component {
     }
 
     handleAddFeature() {
-        // this.props.addFeature(this.state,this.props.history)
-        console.log("state",this.state)
+        const invited = this.state.invited.map((m)=>m.id).filter(d=>d)
+        const body = {...this.state,invited}
+        this.props.addFeature(body, this.props.history)
+        console.log("state",body)
     }
 
     handleTextChange(value, name) {
@@ -27,10 +30,10 @@ class AddFeature extends Component {
 
     handleUserSelection(user) {
         if(user.selected === false ) {
-            const arr = this.state.invited.filter(f=>f != user.id)
+            const arr = this.state.invited.filter(f=>f.id != user.id)
             this.setState({invited: arr});
         }else {
-            const arr= [...this.state.invited, user.id]
+            const arr= [...this.state.invited, user]
             this.setState({invited: arr});
         }
     }

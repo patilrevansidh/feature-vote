@@ -1,6 +1,5 @@
 import React from 'react';
 import Multiselect from 'react-bootstrap-multiselect';
-import 'react-bootstrap-multiselect/css/bootstrap-multiselect.css';
 
 const GroupSelect = (props) => {
     const styles = props.error ? 'form-group has-error' : 'form-group';

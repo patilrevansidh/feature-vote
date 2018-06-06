@@ -22,8 +22,8 @@ class AppHome extends Component {
     async handleLogin() {        
         try {
             const response =await apiService.login(this.state);
-            localStorage.setItem('isLoggedIn',true);
             localStorage.setItem('userDetails',JSON.stringify(response.data.data))
+            localStorage.setItem('isLoggedIn',true);
             this.setState({isLoggedIn:response.success});
         } catch (error) {
             console.log("error in login",error)   

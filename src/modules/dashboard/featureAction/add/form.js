@@ -9,6 +9,7 @@ const NewFeatureForm = (props) => {
             <GroupSelect 
                 label="Select Group(s)"/> 
             <UserSelect 
+                preSelected={props.invited}
                 onSeletionChange={props.onUserSelection}
                 label="Select User(s)"/>
             <FormButton 

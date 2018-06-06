@@ -43,7 +43,7 @@ const  Login = (props) =>{
                                 <input type="checkbox" className="ace" />
                                 <span className="lbl"> Remember Me</span>
                               </label>
-                              <button onClick={(e)=>{e.preventDefault();props.onLogin()}} type="button" className="width-35 pull-right btn btn-sm btn-primary">
+                              <button onClick={(e)=>{props.onLogin()}} type="button" className="width-35 pull-right btn btn-sm btn-primary">
                                 <i className="ace-icon fa fa-key" />
                                 <span className="bigger-110">Login</span>
                               </button>

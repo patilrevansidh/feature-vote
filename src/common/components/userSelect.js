@@ -8,11 +8,14 @@ class SelectMemberField extends Component {
     constructor (props) {
         super(props);
         // this.state = {value : '',selectedApp:props.selectedApp};
-        // this.defaultValue = props.preSelected.map(data => data.id);        
+        this.defaultValue = props.preSelected.map(data => data.id);        
     }
 
     componentWillMount () {
         this.setOptionsConfig('users');
+    }
+    componentWillReceiveProps(nextProps) { 
+        this.defaultValue = nextProps.preSelected.map(data => data.id);
     }
 
     componentDidMount() {
@@ -72,6 +75,7 @@ class SelectMemberField extends Component {
                             multiple
                             multiselect
                             id="abc"
+                            data={this.props.preSelected}
                             defaultValue={this.defaultValue}                            
                             options={this.optionsConfig}
                          />

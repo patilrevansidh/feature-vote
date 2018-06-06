@@ -19,7 +19,6 @@ const AppContent = (props) => {
         <div>
             <Header/>
             <div className="main-container ace-save-state" id="main-container">
-                <MainContainer>
                     <Sidebar/>
                     <div className="main-content">
                         <div className="main-content-inner">
@@ -28,7 +27,6 @@ const AppContent = (props) => {
                             </div>
                         </div>
                     </div>
-                </MainContainer>
             </div>
         </div>
     )
