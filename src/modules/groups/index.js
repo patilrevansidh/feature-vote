@@ -20,7 +20,7 @@ class Groups extends Component {
             <div className="main-content">
                 <div className="main-content-inner">
                     <div className="page-content">
-                        <PageHeader onAddClick={()=>this.props.history.push("app/groups/new")} pageHeader="Features"/>
+                        <PageHeader add={true} onAddClick={()=>this.props.history.push("groups/new")} pageHeader="Features"/>
                         <Table
                             type={TYPE.GROUPS}
                             // onDelete={this.handleDelete.bind(this)}
