@@ -20,7 +20,7 @@ class Users extends Component {
             <div className="main-content">
                 <div className="main-content-inner">
                     <div className="page-content">
-                        <PageHeader onAddClick={()=>this.props.history.push("app/feature/new")} pageHeader="Features"/>
+                        <PageHeader pageHeader="Users"/>
                         <Table
                             type={TYPE.USER}
                             // onDelete={this.handleDelete.bind(this)}

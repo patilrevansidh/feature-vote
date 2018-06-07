@@ -19,7 +19,7 @@ const Sidebar = () => {
     <div id="sidebar" className="sidebar responsive ace-save-state" data-sidebar="true" data-sidebar-scroll="true" data-sidebar-hover="true">
         <ul className="nav nav-list" style={{top: 0}}>
             { adminItems }
-            <SidebarItem name='Features' icon='menu-icon fa fa-code' path="/app/features"/>,
+            <SidebarItem name='Features' icon='menu-icon fa fa-code' path="/app/features"/>
         </ul>
     </div>
 

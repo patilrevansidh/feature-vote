@@ -30,7 +30,7 @@ const DashboardDetail = (props) =>{
         <div className="main-content">
             <div className="main-content-inner">
                 <div className="page-content">
-                    <PageHeader pageHeader="dashboard"/>
+                    <PageHeader pageHeader="Dashboard"/>
                     <div className="row">
                         <div className="col-sm-12 col-xs-12">
                             <div className="row">

@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
-import { HomeRoute, Dashboard, FeatureDetail, NewFeature, Groups, Users, Features } from '../modules/routesImport';
+import { 
+    HomeRoute, Dashboard, FeatureDetail, 
+    NewFeature, Groups, Users, Features, NewGroup
+} from '../modules/routesImport';
 import { Provider } from 'react-redux';
 import store from './store';
 import {Header, MainContainer, Sidebar} from '../common/components';
@@ -44,6 +47,7 @@ const Routes = (props) => {
                 <PrivateRoutes exact path="/app/feature/new" location= {location} component={NewFeature} />                
                 <PrivateRoutes exact path="/app/users" location= {location} component={Users} />
                 <PrivateRoutes exact path="/app/groups" location= {location} component={Groups} />
+                <PrivateRoutes exact path="/app/groups/new" location= {location} component={NewGroup} />
             </Switch>
         </Router>
     )
