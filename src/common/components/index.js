@@ -6,11 +6,11 @@ import Table from './table/table';
 import GroupSelect from './groupSelect';
 import UserSelect from './userSelect';
 import Form from './form';
-import FormButtons from './formButtons';
+import FormButton from './formButtons';
 import TextInput from './textInput';
 
 export { 
     Header, Sidebar, MainContainer, PageHeader, Table, GroupSelect, UserSelect,
-    Form, FormButtons, TextInput
+    Form, FormButton, TextInput
 
 }
