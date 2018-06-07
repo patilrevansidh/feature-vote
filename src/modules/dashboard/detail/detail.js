@@ -1,5 +1,6 @@
 import React from 'react';
-import FeatureComment from '../../features/comments'
+import FeatureComment from '../../features/comments';
+import { STORAGE_KEYS } from '../../../common/constants/stringConstant';
 
 const FeatureDetail = (props) => {
     const content = props.loader ? <div>Loading</div> : <Detail {...props} feature={props.feature}/>
@@ -21,17 +22,46 @@ const FeatureDetail = (props) => {
 };
 
 const Detail = (props) =>{
+    const voted_people = props.feature.voted_people ? props.feature.voted_people.split(',') : []
+    const user = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_DETAILS))
+    const isVoted = voted_people.includes(`${user.id}`)
     return(
         <React.Fragment>
-            <h1 className="left-align">{props.feature.title}</h1>
-            <p className="lead left-align">{props.feature.description}
-            </p>
-            <div className="row">         
-                <h3 className="left-align">Votes</h3>
-                <p className="left-align">{props.feature.vote}</p>
-            </div> 
+            <div className="alert alert-block alert-success">
+                {props.feature.title}
+            </div>            
+            <div className="row">
+                <p className="widget-main padding-6 no-padding-left no-padding-right col-sm-6 col-xs-12">
+                    <i className="ace-icon fa fa-quote-left" style={{margin:5}} />
+                        {props.feature.description}
+                    <i className="ace-icon fa fa-quote-right" style={{margin:5}}/>
+                </p>     
+                <div className="infobox infobox-green col-sm-6 col-xs-12">
+                    <div className="infobox-icon">
+                        <i className="ace-icon fa fa-thumbs-up" />
+                    </div>
+                    <div className="infobox-data">
+                        <span className="infobox-data-number">{props.feature.vote}</span>
+                        <div className="infobox-content">Total Votes</div>
+                    </div>
+                </div>
+                <VoteButton onVotePress={()=>props.onVotePress(props.feature.id)} voted={isVoted}/>
+            </div>
+            <div className="hr hr32 hr-dotted"></div>
             <FeatureComment {...props} comments={props.feature.comments}/>
         </React.Fragment>
+    )
+}
+
+const VoteButton = (props) => {
+    const color = props.voted ? 'success' : 'danger';
+    const label = props.voted ? 'Voted' : 'Hit to Vote';
+    const status = props.voted ? 'disabled' : '';
+    return(
+        <a href="#" onClick={(e)=>{e.preventDefault();props.onVotePress()}} className={`btn btn-${color} ${status}`}>
+            <i className={`fa fa-thumbs-up bigger-300`} />
+            {label}
+        </a>
     )
 }
 

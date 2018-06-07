@@ -13,8 +13,8 @@ class FeatureDetails extends Component {
     componentWillMount() {
         this.setState({loader:true});
     }
-    
-    async componentDidMount() {
+
+    async fetchDetail () {
         try {
             const response = await apiService.fetchFeatureDetail(this.props.match.params.featureId)
             this.setState({feature:response.data.data,loader:false});
@@ -23,9 +23,14 @@ class FeatureDetails extends Component {
         }
     }
     
+    componentDidMount() {
+        this.fetchDetail()
+    }
+    
     render() {   
         return (
                 <Details 
+                    onVotePress={this.handleVote.bind(this)}
                     onChange={(text,name)=>this.setState({[name]:text})}
                     onCommentPress={this.handleCommentPress.bind(this)}
                     loader={this.state.loader}
@@ -38,8 +43,13 @@ class FeatureDetails extends Component {
         this.props.deleteFeature(id,this.props.history)        
     }
 
-    handleVote(id) {
-        this.props.castVote(id)
+    async handleVote(id) {
+        try {
+            const response = await apiService.castVote(id)
+            this.fetchDetail()
+        } catch (error) {
+            
+        }
     }
     async handleCommentPress() {
         const id = this.props.match.params.featureId;
