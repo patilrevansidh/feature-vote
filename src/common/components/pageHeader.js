@@ -31,19 +31,21 @@ const  PageHeader = (props) =>{
         //                                         <Link className="btn btn-success" onClick={(e)=>{this.props.addSchool(e)}}>
         //                                               <i className="fa fa-plus" />
         //                                         </Link>;
+        const add = props.add ?  <div className="col-sm-6">
+                                    <div className="pull-right">                           
+                                        <a className="btn btn-success" onClick={(e)=>{e.preventDefault();props.onAddClick()}}>
+                                            <i className="fa fa-plus" />
+                                    </a>
+                                    </div>
+                                </div>
+                             : null;
         return (
             <div className="page-header">
                 <div className="row">
                     <div className="col-sm-6" style={{paddingTop:10}}>
                         <h1 style={{textAlign:'left'}}>{props.pageHeader}</h1>
-                    </div>
-                    <div className="col-sm-6">
-                        <div className="pull-right">                           
-                            <a className="btn btn-success" onClick={(e)=>{e.preventDefault();props.onAddClick()}}>
-                                 <i className="fa fa-plus" />
-                           </a>
-                        </div>
-                    </div>
+                    </div>          
+                    {add}         
                 </div>
             </div>
         );

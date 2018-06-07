@@ -1,6 +1,10 @@
 import httpService from './httpService';
 
 const api = {
+    fetchDashboardInfo() {
+        const url = 'dashboard';
+        return httpService.get(url)
+    },
     fetchFeatures () {
         const url = 'features'
         return httpService.get(url)
