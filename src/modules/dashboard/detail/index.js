@@ -7,9 +7,14 @@ import { getFeatureDetails, castVote, deleteFeature } from '../../../common/serv
 
 
 class FeatureDetails extends Component {
-    state = {feature:{},loader:true}
+    state = { feature: {}, loader: undefined, comment: ''}
 
-    async componentWillMount() {
+    
+    componentWillMount() {
+        this.setState({loader:true});
+    }
+    
+    async componentDidMount() {
         try {
             const response = await apiService.fetchFeatureDetail(this.props.match.params.featureId)
             this.setState({feature:response.data.data,loader:false});
@@ -19,12 +24,12 @@ class FeatureDetails extends Component {
     }
     
     render() {   
-        if(this.state.loader)   {
-            return <div>Loading</div>
-        }
         return (
                 <Details 
+                    onChange={(text,name)=>this.setState({[name]:text})}
+                    onCommentPress={this.handleCommentPress.bind(this)}
                     loader={this.state.loader}
+                    comment={this.state.comment}
                     feature={this.state.feature}/>
         );
     }
@@ -35,6 +40,15 @@ class FeatureDetails extends Component {
 
     handleVote(id) {
         this.props.castVote(id)
+    }
+    async handleCommentPress() {
+        const id = this.props.match.params.featureId;
+        try {
+            const response = await apiService.postComment(id,this.state.comment)
+            this.setState({feature:response.data.data,comment:''});
+        } catch (error) {
+            
+        }
     }
 
 }

@@ -1,7 +1,8 @@
 import React from 'react';
+import FeatureComment from '../../features/comments'
 
 const FeatureDetail = (props) => {
-    const content = props.loader ? <div>Loading</div> : <Detail feature={props.feature}/>
+    const content = props.loader ? <div>Loading</div> : <Detail {...props} feature={props.feature}/>
     return (
         <div className="main-content">
             <div className="main-content-inner">
@@ -29,16 +30,10 @@ const Detail = (props) =>{
                 <h3 className="left-align">Votes</h3>
                 <p className="left-align">{props.feature.vote}</p>
             </div> 
+            <FeatureComment {...props} comments={props.feature.comments}/>
         </React.Fragment>
     )
 }
 
-const Comments = (props) => {
-    return (
-        <div>
-
-        </div>
-    );
-};
 
 export default FeatureDetail;

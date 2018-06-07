@@ -45,6 +45,11 @@ const api = {
     postGroup (body) {
         const url = 'groups';
         return httpService.post(url,body)
+    },
+    postComment(id,msg) {
+        const url = `features/${id}/comments`;
+        const body = { comment: msg }
+        return httpService.post(url,body)
     }
     
 }
