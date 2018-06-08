@@ -36,6 +36,11 @@ const api = {
         const url = 'users';
         const body = {name:str}
         return httpService.get(url)
+    },    
+    postComment(id,msg) {
+        const url = `features/${id}/comments`;
+        const body = { comment: msg }
+        return httpService.post(url,body)
     },
     fetchGroups (str='') {
         const url = 'groups';
@@ -46,10 +51,13 @@ const api = {
         const url = 'groups';
         return httpService.post(url,body)
     },
-    postComment(id,msg) {
-        const url = `features/${id}/comments`;
-        const body = { comment: msg }
-        return httpService.post(url,body)
+    deleteGroup(id) {
+        const url = `groups/${id}`
+        return httpService.delete(url)
+    },
+    fetchGroupDetail(id) {
+        const url = `groups/${id}`;
+        return httpService.get(url)
     }
     
 }

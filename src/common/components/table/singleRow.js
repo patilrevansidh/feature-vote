@@ -20,17 +20,19 @@ const SingleRow = (props) => {
                     </React.Fragment>
                   : null
     return (
-        <tr>
-            {rowData}
-            <td>
-                <div className='hidden-sm hidden-xs btn-group'>                    
-                    {actions}
-                    <button className="btn btn-xs btn-success" onClick={(e)=>props.onDetails(props.data.id)}>
-                        <i className="ace-icon fa fa-eye bigger-120" />
-                    </button>
-                </div>
-            </td>
-        </tr>
+        <React.Fragment>
+             <tr>
+                {rowData}
+                <td>
+                    <div className='hidden-sm hidden-xs btn-group'>                    
+                        {actions}
+                        <button className="btn btn-xs btn-success" onClick={(e)=>props.onDetails(props.data.id)}>
+                            <i className="ace-icon fa fa-eye bigger-120" />
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </React.Fragment>       
     );
 };
 

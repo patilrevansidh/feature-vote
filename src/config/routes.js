@@ -6,6 +6,7 @@ import {
 } from '../modules/routesImport';
 import { Provider } from 'react-redux';
 import store from './store';
+import { STORAGE_KEYS } from '../common/constants/stringConstant';
 import {Header, MainContainer, Sidebar} from '../common/components';
 
 
@@ -37,6 +38,8 @@ const AppContent = (props) => {
 
 const Routes = (props) => {
     const {location} = window
+    const user = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_DETAILS))
+    const isAdmin = user && user.role == 'admin' ? true : false
     return(
         <Router>
             <Switch>
