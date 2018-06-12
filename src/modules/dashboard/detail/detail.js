@@ -1,6 +1,7 @@
 import React from 'react';
 import FeatureComment from '../../features/comments';
 import { STORAGE_KEYS } from '../../../common/constants/stringConstant';
+import {CommentWidgetHeader} from '../../features/comments/commentComponent';
 
 const FeatureDetail = (props) => {
     const content = props.loader ? <div>Loading</div> : <Detail {...props} feature={props.feature}/>
@@ -49,7 +50,38 @@ const Detail = (props) =>{
             </div>
             <div className="hr hr32 hr-dotted"></div>
             <FeatureComment {...props} comments={props.feature.comments}/>
+            <VottingDetails {...props}/>
         </React.Fragment>
+    )
+}
+const VottingDetails = (props)=>{
+    const voted = props.feature && Array.isArray(props.feature.voted_users) 
+                    ? props.feature.voted_users.map(m=><div>{m.username}</div>)
+                    : null;
+    const non_voted = props.feature && Array.isArray(props.feature.non_voted_people) 
+                    ? props.feature.non_voted_people.map(m=><div>{m.username}</div>)
+                    : null;
+    return(
+        <div className="col-sm-6 col-xs-12">
+              <div className="col-sm-12 col-xs-12">
+                <div className="widget-box">        
+                    <div className="widget-header">
+                        <p className="widget-title">Voted</p>
+                    </div>
+                    {voted}                       
+                </div>
+              </div>
+              <div className="col-sm-12 col-xs-12">
+                <div className="widget-box">
+                    <div className="widget-header">
+                        <p className="widget-title">
+                         Non Voted
+                        </p>
+                    </div>
+                    {non_voted}
+                </div>
+               </div>
+        </div>
     )
 }
 

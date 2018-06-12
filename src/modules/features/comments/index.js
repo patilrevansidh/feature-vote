@@ -10,7 +10,7 @@ const Comments = (props) => {
                             </div>
                         </div>
     return (
-        <div className="col-sm-10">
+        <div className="col-sm-6">
             <div className="widget-box">
                 <CommentWidgetHeader/>
                 <div className="widget-body">
