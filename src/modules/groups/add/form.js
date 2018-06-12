@@ -4,8 +4,11 @@ import { Form, TextInput, FormButton, UserSelect } from '../../../common/compone
 const AddForm = (props) => {
     return (
         <Form>
-            <TextInput label="Name" placeholder="Group Name"  onChange={(e)=>props.onTextChange(e.target.value,'name')}/>
-            <UserSelect 
+            <TextInput 
+                error={props.error && props.error.nameError ? props.error.nameError : null }
+                label="Name" placeholder="Group Name"  onChange={(e)=>props.onTextChange(e.target.value,'name')}/>
+            <UserSelect
+                error={props.error && props.error.memberError ? props.error.memberError : null}
                 preSelected={props.selected}
                 onSeletionChange={props.onUserSelection}
                 label="Select User(s)"/>

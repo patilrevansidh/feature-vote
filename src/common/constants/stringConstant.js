@@ -25,3 +25,13 @@ export const TYPE = {
     GROUPS : 'groups',
 
 }
+
+export const ERROR = {
+    USER_NAME: 'Enter Username.',
+    PASSWORD: 'Enter password.',
+    GRP_NAME: 'Enter Group Name.',
+    GRP_MEMBER: 'Select user(s).',
+    FEATURE_TITLE: 'Enter Feature Title.',
+    FEATURE_DESCRIPTION: 'Enter Feature Description.'
+
+}

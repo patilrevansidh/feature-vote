@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 const  Login = (props) =>{ 
+  
+  const usernameError = props.error && props.error.usernameError ? 'form-group has-error' : 'form-group';
+  const passwordError = props.error && props.error.passwordError ? 'form-group has-error' : 'form-group';
+
     return (
       <div className="main-container">
         <div className="main-content">
@@ -25,13 +29,14 @@ const  Login = (props) =>{
                         <div className="space-6" />
                         <form>
                           <fieldset>
-                            <label className="block clearfix">
+                            <label className={`block clearfix ${usernameError}`}>
                               <span className="block input-icon input-icon-right">
                                 <input type="text" className="form-control" onChange={(e)=>props.onTextChange(e.target.value,'username')} placeholder="Username" />
                                 <i className="ace-icon fa fa-user" />
+                                {props.error && props.error.usernameError}
                               </span>
                             </label>
-                            <label className="block clearfix">
+                            <label className={`block clearfix ${passwordError}`}>
                               <span className="block input-icon input-icon-right">
                                 <input type="password" className="form-control" placeholder="Password" onChange={(e)=>props.onTextChange(e.target.value,'password')} />
                                 <i className="ace-icon fa fa-lock" />

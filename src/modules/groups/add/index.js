@@ -3,12 +3,14 @@ import { withRouter }  from 'react-router-dom';
 import Form from './form';
 import _ from 'lodash';
 import apiService from '../../../common/service/apiService';
+import { ERROR } from '../../../common/constants/stringConstant';
 
 class AddGroup extends Component {
-    state = {selected:[],name:''}
+    state = { selected: [], name: '', error: undefined}
     render() {
         return (
             <Form            
+                error={this.state.error}
                 selected={this.state.selected}
                 onUserSelection={this.handleUserSelection.bind(this)}
                 onAdd={this.handleSubmitGroup.bind(this)}
@@ -18,17 +20,28 @@ class AddGroup extends Component {
         );
     }
 
+    isValidForm () {
+        const { name, selected } = this.state
+        const nameError = name.trim() ? null : ERROR.GRP_NAME 
+        const memberError  = selected.length > 0 ? null : ERROR.GRP_MEMBER
+        const error = { nameError, memberError }
+        this.setState({error});
+        return !nameError && !memberError
+    }
+
     async handleSubmitGroup() {
-        const ids = this.state.selected.map(m=>m.id)
-        const body = {
-            user_ids : ids.toString(),
-            name : this.state.name
-        }
-        try {
-            const response = await apiService.postGroup(body)
-            this.props.history.goBack()
-        } catch (error) {
-            
+        if(this.isValidForm()) {
+            const ids = this.state.selected.map(m=>m.id)
+            const body = {
+                user_ids : ids.toString(),
+                name : this.state.name
+            }
+            try {
+                const response = await apiService.postGroup(body)
+                this.props.history.goBack()
+            } catch (error) {
+                
+            }
         }
     }
     handleUserSelection(user) {

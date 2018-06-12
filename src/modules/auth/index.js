@@ -5,7 +5,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import Form from './form';
 
 class AppHome extends Component {
-    state={username:'',password:'',isLoggedIn:false,error:undefined}
+    state={ username:'',password:'', isLoggedIn: false, error: undefined }
     
     render() {
         if(this.state.isLoggedIn) {
@@ -18,8 +18,15 @@ class AppHome extends Component {
                 onTextChange={this.handleTextChange.bind(this)}/>
         );
     }
-
-    async handleLogin() {        
+    isValidForm() {
+        const usernameError = this.state.username.trim() ? undefined : 'Enter user name';
+        const passwordError = this.state.password.trim() ? undefined : 'Enter user name';
+        const error = { usernameError, passwordError }
+        this.setState({error});
+        return !usernameError && !passwordError
+    }
+    async handleLogin() {
+       if(this.isValidForm()) {
         try {
             const response =await apiService.login(this.state);
             localStorage.setItem('userDetails',JSON.stringify(response.data.data))
@@ -28,6 +35,7 @@ class AppHome extends Component {
         } catch (error) {
             console.log("error in login",error)   
         }
+       }
     }
 
     handleTextChange(value,name) {

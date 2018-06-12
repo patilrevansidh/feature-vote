@@ -4,11 +4,16 @@ import { GroupSelect, UserSelect, Form, TextInput, FormButton} from '../../../..
 const NewFeatureForm = (props) => {
     return (
         <Form>
-            <TextInput label="Title" placeholder="Feature title"  onChange={(e)=>props.onTextChange(e.target.value,'title')} />
-            <TextInput label="description" placeholder="Feature description"  onChange={(e)=>props.onTextChange(e.target.value,'description')} />
+            <TextInput 
+                error={ props.error && props.error.titleError ? props.error.titleError : null }
+                label="Title" placeholder="Feature title"  onChange={(e)=>props.onTextChange(e.target.value,'title')} />
+            <TextInput 
+                error={ props.error && props.error.descriptionError ? props.error.descriptionError : null }
+                label="description" placeholder="Feature description"  onChange={(e)=>props.onTextChange(e.target.value,'description')} />
                 {/* <GroupSelect 
                     label="Select Group(s)"/>  */}
             <UserSelect 
+                error={ props.error && props.error.invitedError ? props.error.invitedError : null }
                 preSelected={props.invited}
                 onSeletionChange={props.onUserSelection}
                 label="Select User(s)"/>
