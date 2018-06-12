@@ -15,10 +15,10 @@ export const doLogin = (body) => {
     }
 }
 
-export const getFeatures = () => {
+export const getFeatures = (filter) => {
     return async (dispatch) =>{
         try {
-            const response = await api.fetchFeatures();
+            const response = await api.fetchFeatures(filter);
             dispatch({ type: actions.GET_FEATURES, payload: response.data.data })
         } catch (error) {
             console.log("feature error")    

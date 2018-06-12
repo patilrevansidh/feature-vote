@@ -9,10 +9,14 @@ import { Link,withRouter } from 'react-router-dom';
 // import { swalService } from '../../../common/service';
 
 class Admindashboard extends Component {
-    state = {features:[]}
+    state = {features:[],filter:{}}
     
     componentWillMount(){ 
-        this.props.getFeatures()    
+        this.fetchFeatures({})
+    }
+
+    fetchFeatures(body={}) {
+        this.props.getFeatures(body)    
     }
 
     render() {
@@ -21,6 +25,15 @@ class Admindashboard extends Component {
                 <div className="main-content-inner">
                     <div className="page-content">
                         <PageHeader add={true} onAddClick={()=>this.props.history.push("feature/new")} pageHeader="Features"/>
+                        <div style={{margin:5}} className="pull-right">
+                            <b className="text-primary">Order</b>
+                            &nbsp;
+                            <select onChange={this.handleFilterChange.bind(this)} >
+                                <option value="">Clear</option>
+                                <option value="newest">Newest First</option>
+                                <option value="most">Most Voted</option>
+                            </select>
+                        </div>
                         <Table
                             type={TYPE.FEATURE}
                             onArchive={(id)=>console.log('onArchive',id)}
@@ -36,6 +49,23 @@ class Admindashboard extends Component {
         );
     }
 
+    handleFilterChange(e) {
+        e.preventDefault()
+        switch(e.target.value) {
+            case 'newest':
+                const newest = true
+                this.fetchFeatures({newest})
+                break;
+            case 'most':
+                const most = true
+                this.fetchFeatures({most})
+                break;
+            default:
+                this.fetchFeatures({})
+
+        }
+    }
+
     handleDelete(id) {
         this.props.deleteFeature(id)
     }
@@ -49,7 +79,7 @@ const mapStateToProps = (state) =>({
 })
 
 const mapDispatchToProps = (dispatch) =>({
-    getFeatures : ()=>{ dispatch(getFeatures())},
+    getFeatures : (filter)=>{ dispatch(getFeatures(filter))},
     deleteFeature : (id)=>{ dispatch( deleteFeature(id) )},
     castVote : (id)=>{ dispatch( castVote(id) )}
 })

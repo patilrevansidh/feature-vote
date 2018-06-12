@@ -5,9 +5,9 @@ const api = {
         const url = 'dashboard';
         return httpService.get(url)
     },
-    fetchFeatures () {
+    fetchFeatures (body) {
         const url = 'features'
-        return httpService.get(url)
+        return httpService.get(url,body)
     },
     deleteFeature (id) {
         const url = `features/${id}`
