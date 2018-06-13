@@ -9,7 +9,7 @@ export const HEADER = {
     GROUPS : ['Name','Action'],    
 }
 export const FIELDS = {
-    FEATURE : ['title','vote','created_by'],
+    FEATURE : ['title','vote','posted_by'],
     USER : ['username','role','email'], 
     GROUPS : ['name'],
 }

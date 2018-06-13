@@ -62,7 +62,7 @@ class Admindashboard extends Component {
                 break;
             default:
                 this.fetchFeatures({})
-
+                
         }
     }
 
